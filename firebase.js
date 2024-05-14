@@ -15,12 +15,4 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 /* Creamos conexion con ire base. */
-export const conex = async () => {
-    try {
-        const db = await app.firestore()
-        return db
-    } catch (error) {
-        console.log(error.message)
-    }
-}
-
+export const db = getFirestore(app);
