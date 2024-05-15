@@ -3,8 +3,9 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Navbar from './layout/navbar/Navbar.component'
 import { CtxProvider } from './context/context'
-import Prueba from './components/Prueba/Prueba'
-
+import LoginCard from './components/LoginCard/LoginCard'
+import Signup from './components/signUpCard/Signup'
+import PopUp from './components/PopUps/PopUp'
 
 
 
@@ -15,8 +16,11 @@ function App() {
     <>
       <CtxProvider>
         <Router>
-          <Navbar/>
-            <Prueba/>
+          <Navbar />
+          {/* <LoginCard />*/}
+          <Signup />
+          {/* <PopUp status={true} message={'Usuario registrado con exito.'} />
+          <PopUp status={false} message={'Error ha pasado algo'} /> */}
           <Routes>
           </Routes>
         </Router>

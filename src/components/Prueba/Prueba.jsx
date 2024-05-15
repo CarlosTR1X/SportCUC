@@ -1,20 +1,19 @@
-import { collection, doc, getDoc } from 'firebase/firestore'
+import { collection, doc, getDocs } from 'firebase/firestore'
 import React from 'react'
-import { db } from '../../../fireBase'
+import { userCollection } from '../../firebase'
+
 
 
 const Prueba = () => {
 
     const handleTest = async () => {
         try {
-            const userCollection = collection(db, "usuarios")
-            const snapshot = await getDoc(userCollection)
+            const snapshot = await getDocs(userCollection)
             const userData = await snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
 
             }))
-            console.log(userData)
         } catch (error) {
             console.log(error.message)
         }
@@ -22,7 +21,9 @@ const Prueba = () => {
 
 
     return (
-        <div><button onClick={handleTest}>Prueba</button></div>
+        <div>
+            <button className="btn bg-gray-400 p-2 border rounded-lg text-white hover:bg-white hover:border-black hover:text-black" onClick={handleTest}>Prueba</button>
+        </div>
     )
 }
 

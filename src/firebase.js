@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { collection, getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyD1Bi0EGqvnmuVIZa0Sx33BFMANXGdjml0",
@@ -12,7 +13,11 @@ const firebaseConfig = {
 };
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
 /* Creamos conexion con ire base. */
 export const db = getFirestore(app);
+export const auth = getAuth(app);
+
+/* Collections */
+export const userCollection = collection(db, "usuarios")
+
