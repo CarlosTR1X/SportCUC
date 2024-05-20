@@ -2,23 +2,31 @@ import { useState } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Navbar from './layout/navbar/Navbar.component'
-import { CtxProvider } from './context/context'
+import { CtxProvider, useCtx } from './context/context'
 import LoginCard from './components/LoginCard/LoginCard'
-import Signup from './components/signUpCard/Signup'
+import SignUpCard from './components/signUpCard/SignUpCard'
 import PopUp from './components/PopUps/PopUp'
+import AuthModalIndex from './layout/AuthModal/AuthModal'
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { authSession, modalData } = useCtx()
 
+    console.log(modalData)
   return (
     <>
       <CtxProvider>
         <Router>
           <Navbar />
+          <div className='w-1/2'>
+            <div className='text-white mb-10'>
+              <span className='text-5xl '>Hola, {authSession ? "Usuario" : ""}</span>
+            </div>
+          </div>
           {/* <LoginCard />*/}
-          <Signup />
+          {/*  <Signup /> */}
+          {/* <AuthModalIndex /> */}
           {/* <PopUp status={true} message={'Usuario registrado con exito.'} />
           <PopUp status={false} message={'Error ha pasado algo'} /> */}
           <Routes>

@@ -23,8 +23,8 @@ const LoginCard = () => {
     }
 
     return (
-        <div className='w-[550px] m-auto mt-2'>
-            <form className='p-5 shadow-lg rounded-lg' onSubmit={onSubmit}>
+        <div className='w-[90%] m-auto py-14'>
+            <form className='p-5  rounded-lg' onSubmit={onSubmit}>
                 <p className='font-medium text-baseBlack mb-6'>Bienvenido de nuevo! 👋🏻</p>
                 {error && <p className="m-1 mx-1 text-red-500 text-sm">🚨 Error de testeo</p>}
 
@@ -36,7 +36,6 @@ const LoginCard = () => {
                 </p>
 
             </form>
-            {/* {errorPhone && <ErrorModal error={errorPhone} onClose={handleCloseModal} />} */}
         </div>
     )
 }

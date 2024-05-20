@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { createContext, useState, useContext, useEffect } from "react";
 import { auth } from "../firebase";
 
@@ -14,13 +14,24 @@ export function CtxProvider({ children }) {
     /*
     Instnaciamos los useStates de todos nuestros componentes que usaremos en el proyecto
     */
+    const [authSession, setAuthSession] = useState(null);
     const [modalFormOpen, setModalFormOpen] = useState('');
     const [data, setData] = useState({});
     const [modalConfirmacionAbierto, setModalConfirmacionAbierto] = useState(false);
     const [modalEmpleado, setModalEmpleado] = useState(false);
     const [mensajeEnviado, setMensajeEnviado] = useState([])
+    const [modalData, setModalData] = useState({ open: false, modalId: "" })
+
     useEffect(() => {
-    })
+        // Verificar si el usuario ya está autenticado al cargar la página
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            console.log("verificando estado del usuario con firebase");
+            setAuthSession(user);
+        });
+
+        // Limpia el suscriptor al desmontar el componente
+        return () => unsubscribe();
+    }, [])
 
 
     const login = async (email, password) => {
@@ -28,7 +39,7 @@ export function CtxProvider({ children }) {
             const session = await signInWithEmailAndPassword(auth, email, password);
             return session
         } catch (e) {
-            console.log(e.error)
+            console.log(e.message)
             throw e;
         }
     }
@@ -46,12 +57,14 @@ export function CtxProvider({ children }) {
     /* Devuelve componente de los hooks implementados en el context*/
     return (
         <Context.Provider value={{
+            authSession, setAuthSession,
             login, signUp,
             modalFormOpen, setModalFormOpen,
             data, setData,
             modalConfirmacionAbierto, setModalConfirmacionAbierto,
             modalEmpleado, setModalEmpleado,
-            mensajeEnviado, setMensajeEnviado
+            mensajeEnviado, setMensajeEnviado,
+            modalData, setModalData
         }}>
             {children}
         </Context.Provider>
