@@ -7,18 +7,19 @@ import LoginCard from './components/LoginCard/LoginCard'
 import SignUpCard from './components/signUpCard/SignUpCard'
 import PopUp from './components/PopUps/PopUp'
 import AuthModalIndex from './layout/AuthModal/AuthModal'
+import ProfileDropdown from './components/Buttons/DropdownProfile'
 
 
 
 function App() {
   const { authSession, modalData } = useCtx()
 
-    console.log(modalData)
   return (
     <>
       <CtxProvider>
         <Router>
           <Navbar />
+          {/* <ProfileDropdown /> */}
           <div className='w-1/2'>
             <div className='text-white mb-10'>
               <span className='text-5xl '>Hola, {authSession ? "Usuario" : ""}</span>

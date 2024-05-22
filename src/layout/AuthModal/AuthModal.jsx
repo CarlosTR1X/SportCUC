@@ -7,7 +7,7 @@ import { useCtx } from '../../context/context'
 export default function AuthModalIndex({ }) {
     const { setModalData, modalData, setAuth, auth } = useCtx()
 
-    return <ModalContainer onClose={() => setModalData({ open: false, modalId: "" })}>
+    return <ModalContainer className={`h-[85vh]`} onClose={() => setModalData({ open: false, modalId: "" })}>
         <div className='w-full max-h-full  transition-all'>
             <div className='flex font-medium border-b pb-5'>
                 <button className='mr-5 focus:text-blue-500' onClick={() => setModalData({ open: true, modalId: "LOGIN" })}>Login</button>

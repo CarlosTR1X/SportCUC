@@ -3,9 +3,10 @@ import Image from '../Image/Image'
 import InputWithLabel from '../Inputs/InputWithLabel'
 import Button from '../Buttons/Button';
 import { useCtx } from '../../context/context';
+import { validateErrorFirebase } from '../../functions/errorValidate.firebase';
 
 const LoginCard = () => {
-    const { login } = useCtx();
+    const { login, setModalData } = useCtx();
     const [error, setError] = useState(null);
     const [formData, setFormData] = useState({
         email: '',
@@ -17,16 +18,22 @@ const LoginCard = () => {
     }
 
     const onSubmit = async (e) => {
-        e.preventDefault();
-        const verify = await login(formData.email, formData.password);
-        if (verify) setFormData({ email: '', password: '' });
+        try {
+            e.preventDefault();
+            const verify = await login(formData.email, formData.password);
+            if (verify) setFormData({ email: '', password: '' }); setModalData({ open: false, modalId: "" });
+
+        } catch (e) {
+            console.log(e.message)
+            setError(validateErrorFirebase(e))
+        }
     }
 
     return (
         <div className='w-[90%] m-auto py-14'>
             <form className='p-5  rounded-lg' onSubmit={onSubmit}>
                 <p className='font-medium text-baseBlack mb-6'>Bienvenido de nuevo! 👋🏻</p>
-                {error && <p className="m-1 mx-1 text-red-500 text-sm">🚨 Error de testeo</p>}
+                {error && <p className="m-1 mx-1 text-red-500 text-sm">🚨 {error}</p>}
 
                 <InputWithLabel onChange={handleChange} value={formData.email} type='text' name='email' label="Email" className='mb-3' />
                 <InputWithLabel onChange={handleChange} value={formData.password} type='password' name='password' label="Password" className='mb-3' />

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useCtx } from '../../context/context';
 import InputWithLabel from '../Inputs/InputWithLabel';
 import Button from '../Buttons/Button';
-import { User } from '../functions/user.service';
+import { User } from '../../functions/user.service';
 import { set } from 'firebase/database';
 import PopUp from '../PopUps/PopUp';
 
@@ -42,8 +42,10 @@ const SignUpCard = () => {
             await userInstance.saveUser(userData);
             setPopUpStatus(true);
             setPropsPopUp({ status: true, message: 'Usuario registrado con exito.' })
+            setModalData({ open: false, modalId: "" });
+            localStorage.setItem('userData', JSON.stringify(userData));
          }
-        
+
       } catch (e) {
          setError({ message: e.message })
       }

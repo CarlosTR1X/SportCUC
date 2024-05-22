@@ -11,8 +11,18 @@ module.exports = {
         "basePurple": "#9E77ED",
         "baseGray": "#667085",
         "darkerGray": "#344054",
-        "baseGreen": "#32D583"
-      }
+        "baseGreen": "#32D583",
+        'black-80': 'rgba(0, 0, 0, 0.8)',
+      },
+      screens: {
+        'mdsm': '768px', //  breakpoint personalizado
+      },
+    },
+
+  },
+  variants: {
+    extend: {
+      backdropFilter: ['responsive'], // Enable responsive backdrop-filter
     },
   },
   plugins: [],

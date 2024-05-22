@@ -5,13 +5,18 @@ import BurguerButton from './burguerButton/BurguerButton.component'
 import Button from '../../components/Buttons/Button'
 import { useCtx } from '../../context/context'
 import AuthModalIndex from '../AuthModal/AuthModal'
+import ProfileDropdown from '../../components/Buttons/DropdownProfile'
+import ModalContainer from '../../components/Modals/ModalContainer'
 
 const Navbar = () => {
   const [active, setActive] = useState(false)
-  const { authSession, setModalData, modalData } = useCtx()
+  const { authSession, setModalData, modalData, cerrarSesion, userSessionData } = useCtx()
+  const [isOpen, setIsOpen] = useState(false);
+  const [sessionOut, setSessionOut] = useState(false);
 
   const handleClick = () => {
     setActive(!active)
+    setIsOpen(false);
   }
 
   const handleLoginButton = () => {
@@ -21,6 +26,31 @@ const Navbar = () => {
   const handleSignupButton = () => {
     setModalData({ open: true, modalId: "SIGNUP" })
     setActive(false)
+  }
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onCloseSessionOutModal = () => {
+    setSessionOut(!sessionOut);
+  }
+
+  const singOut = async () => {
+    try {
+
+      console.log('sessionOut')
+      const close = await cerrarSesion();
+      if (close != null) throw new Error('Algo ha salido mal.')
+      setActive(false);
+      setIsOpen(false);
+      setSessionOut(!sessionOut);
+      setTimeout(() => {
+        setSessionOut(false);
+      }, 4000);
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -37,7 +67,9 @@ const Navbar = () => {
             <Link onClick={() => handleLoginButton()}>Login</Link>
             <Link onClick={() => handleSignupButton()}>Sign Up</Link>
           </>) : (<>
-            <Link>Mi perfil</Link>
+            {userSessionData.rol == 'admin' && <Link >Admin</Link>}
+            <Link onClick={toggleDropdown}>Usuario</Link>
+
           </>
           )}
 
@@ -47,7 +79,13 @@ const Navbar = () => {
         </div>
         <BgDiv className={`initial ${active ? ' active' : ''}`}></BgDiv>
       </NavContainer>
-
+      {isOpen && <ProfileDropdown onClick={singOut} rol={userSessionData.rol} />}
+      {sessionOut &&
+        <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-transparent w-[220px] h-[150px] shadow-xl'} >
+          <div className="w-full h-full p-4 flex items-center justify-center">
+            <h1 className='font-semibold text-base text-center'>Has cerrado sesión.</h1>
+          </div>
+        </ModalContainer >}
     </>
   )
 }
@@ -112,7 +150,7 @@ const NavContainer = styled.nav`
       margin: 1rem;
       color: white;
       position: relative;
-      z-index: 999;
+      z-index: 991;
     }
   }
   .burguer{
