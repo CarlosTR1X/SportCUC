@@ -58,7 +58,7 @@ const SignUpCard = () => {
    return (
       <div className='w-full h-full m-auto mt-2 rounded-lg mb-2'>
          <form className='p-5 rounded-lg overflow-y-auto' onSubmit={handleSubmit}>
-            <p className='font-medium text-baseBlack mb-1'>Te pediremos algunos datos, esto no tardara mucho! 👋🏻</p>
+            <p className='font-medium text-bg-baseBlack mb-1'>Te pediremos algunos datos, esto no tardara mucho! 👋🏻</p>
             <InputWithLabel onChange={handleChange} value={userForm.nombre} type='text' name='nombre' label="Nombre" className='mb-3' />
             <InputWithLabel onChange={handleChange} value={userForm.apellido} type='text' name='apellido' label="Apellido" className='mb-3' />
             <InputWithLabel onChange={handleChange} value={userForm.email} type='mail' name='email' label="Email" className='mb-3' />

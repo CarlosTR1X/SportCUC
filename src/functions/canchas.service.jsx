@@ -8,6 +8,7 @@ export class Canchas {
         try {
             const docRef = await addDoc(collection(db, "canchas"), {
                 "nombre": cancha.nombre,
+                "tipo": cancha.tipo,
                 "descripcion": cancha.descripcion,
                 "disponibilidad": cancha.disponibilidad,
                 "capacidad": cancha.capacidad,

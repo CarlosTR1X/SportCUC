@@ -32,7 +32,7 @@ const LoginCard = () => {
     return (
         <div className='w-[90%] m-auto py-14'>
             <form className='p-5  rounded-lg' onSubmit={onSubmit}>
-                <p className='font-medium text-baseBlack mb-6'>Bienvenido de nuevo! 👋🏻</p>
+                <p className='font-medium text-bg-baseBlack mb-6'>Bienvenido de nuevo! 👋🏻</p>
                 {error && <p className="m-1 mx-1 text-red-500 text-sm">🚨 {error}</p>}
 
                 <InputWithLabel onChange={handleChange} value={formData.email} type='text' name='email' label="Email" className='mb-3' />

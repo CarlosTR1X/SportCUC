@@ -25,7 +25,7 @@ export function CtxProvider({ children }) {
     const [modalEmpleado, setModalEmpleado] = useState(false);
     const [mensajeEnviado, setMensajeEnviado] = useState([])
     const [modalData, setModalData] = useState({ open: false, modalId: "" })
-    const [userSessionData, setUserSessionData] = useState({ rol: '' })
+    const [userSessionData, setUserSessionData] = useState({})
 
     useEffect(() => {
         // Verificar si el usuario ya está autenticado al cargar la página

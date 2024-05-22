@@ -58,34 +58,41 @@ const Navbar = () => {
       { /*** LOGIN AND SIGNUP POPUP */
         !authSession && modalData.open && (modalData.modalId === "LOGIN" || modalData.modalId === "SIGNUP") && <AuthModalIndex />
       }
-      <NavContainer>
-        <Link to="/"><h2>Sport</h2></Link>
-        <div className={`links ${active ? 'active' : ''}`}>
-          <Link to="/">Home</Link>
-          <Link to="/about">Sobre Nosotros</Link>
-          {!authSession ? (<>
-            <Link onClick={() => handleLoginButton()}>Login</Link>
-            <Link onClick={() => handleSignupButton()}>Sign Up</Link>
-          </>) : (<>
-            {userSessionData.rol == 'admin' && <Link >Admin</Link>}
-            <Link onClick={toggleDropdown}>Usuario</Link>
+      <div className='bg-baseBlack'>
+        <NavContainer className={'bg-baseBlack'}>
+          <Link to="/"><h2>Sport</h2></Link>
+          <div className={` links ${active ? 'active' : ''}`}>
+            <Link to="/">Home</Link>
+            <Link to="/about">Sobre Nosotros</Link>
+            {!authSession ? (<>
+              <Link onClick={() => handleLoginButton()}>Login</Link>
+              <Link onClick={() => handleSignupButton()}>Sign Up</Link>
+            </>) : (<>
+              {userSessionData.rol == 'admin' && <Link to="/admin">Admin</Link>}
+              <Link onClick={toggleDropdown}>
+                <div className="mt-2 inline-flex w-8 h-8 relative justify-center border-4 border-white rounded-full overflow-hidden">
+                  <img className="object-fill object-center" src='images/user_default.jpg' alt='Woman looking front' />
+                </div>
+              </Link>
 
-          </>
-          )}
+            </>
+            )}
 
-        </div>
-        <div className='burguer'>
-          <BurguerButton active={active} handleClick={handleClick} />
-        </div>
-        <BgDiv className={`initial ${active ? ' active' : ''}`}></BgDiv>
-      </NavContainer>
-      {isOpen && <ProfileDropdown onClick={singOut} rol={userSessionData.rol} />}
-      {sessionOut &&
-        <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-transparent w-[220px] h-[150px] shadow-xl'} >
-          <div className="w-full h-full p-4 flex items-center justify-center">
-            <h1 className='font-semibold text-base text-center'>Has cerrado sesión.</h1>
           </div>
-        </ModalContainer >}
+          <div className='burguer'>
+            <BurguerButton active={active} handleClick={handleClick} />
+          </div>
+          <BgDiv className={`initial ${active ? ' active' : ''}`}></BgDiv>
+        </NavContainer>
+        {isOpen && <ProfileDropdown onClick={singOut} rol={userSessionData.rol} />}
+        {sessionOut &&
+          <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-transparent w-[220px] h-[150px] shadow-xl'} >
+            <div className="w-full h-full p-4 flex items-center justify-center">
+              <h1 className='font-semibold text-base text-center'>Has cerrado sesión.</h1>
+            </div>
+          </ModalContainer >}
+      </div>
+
     </>
   )
 }
@@ -101,14 +108,15 @@ const NavContainer = styled.nav`
     }
   }
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
+  text-align: center;
   justify-content: space-between;
   a{
     color: white;
     text-decoration: none;
     margin-right: 1rem;
+ 
   }
   .links{
     position: absolute;
@@ -127,12 +135,13 @@ const NavContainer = styled.nav`
     @media(min-width: 768px){
       position: initial;
       margin: 0;
+      align-items: center;
       a{
         font-size: 1rem;
         color: white;
         display: inline;
       }
-      display: block;
+      display: flex;
     }
   }
   .links.active{
