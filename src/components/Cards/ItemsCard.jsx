@@ -1,23 +1,25 @@
 import React from 'react'
+import { convertTimestamp } from '../../utils/dateUtils';
 
 const ItemsCard = ({ item, onEdit, onDelete, onShow }) => {
+    const date = convertTimestamp(item.createdAt);
     return (
-        <div>
-            <div className="max-w-sm p-2 rounded-lg overflow-hidden shadow-lg bg-white">
+        <div className='px-2'>
+            <div className="max-w-sm p-2 rounded-lg overflow-hidden shadow-white  bg-baseBlack">
                 <img className="w-full h-28 object-cover" src={item.imagen_URL} alt={item.nombre} />
                 <div className="px-5 pb-4">
-                    <div className="font-bold text-base text-center text-darkerGray my-1">{item.nombre}</div>
+                    <div className="font-bold text-base text-center text-white my-1">{item.nombre}</div>
                     <p className="text-baseGray text-sm">{item.descripcion}</p>
                 </div>
                 <div className="px-5 pt-2 pb-2">
-                    <span className={`inline-flex bg-${item.disponibilidad ? 'green' : 'red'}-500 rounded-full px-1 py-1 text-xs font-semibold text-white mr-2 mb-1`}>
+                    <span className={`inline-flex bg-${item.disponibilidad ? 'green' : 'red'}-500 rounded-full px-2 py-1 text-xs font-semibold text-white mr-2 mb-1`}>
                         {item.disponibilidad ? "Disponible" : "No Disponible"}
                     </span>
                     <span className="inline-flex bg-gray-200 rounded-full px-1 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">
                         Capacidad: {item.capacidad}
                     </span>
-                    <span className="inline-flex bg-gray-200 rounded-full px-1 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">
-                        {new Date(item.createdAt).toLocaleDateString()}
+                    <span className="inline-flex bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">
+                        {date.toLocaleDateString()}
                     </span>
                     <p className="relative inline-flex w-full  text-baseGray text-xs mt-2 justify-items-end">
                         <i className="fas fa-map-marker-alt my-auto"></i>

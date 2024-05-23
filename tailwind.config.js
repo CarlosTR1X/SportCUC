@@ -8,10 +8,10 @@ module.exports = {
     extend: {
       colors: {
         "basePurple": "#9E77ED",
-        "baseGray": "#667085",
+        "baseGray": "#d1d5db",
         "darkerGray": "#344054",
         "baseGreen": "#32D583",
-        'baseBlack': 'rgba(0, 0, 0, 0.9)',
+        'baseBlack': 'rgba(0, 0, 0, 0.6)',
       },
       screens: {
         'mdsm': '768px', //  breakpoint personalizado

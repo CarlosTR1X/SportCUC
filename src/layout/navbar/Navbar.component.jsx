@@ -58,14 +58,14 @@ const Navbar = () => {
       { /*** LOGIN AND SIGNUP POPUP */
         !authSession && modalData.open && (modalData.modalId === "LOGIN" || modalData.modalId === "SIGNUP") && <AuthModalIndex />
       }
-      <div className='bg-baseBlack'>
-        <NavContainer className={'bg-baseBlack'}>
+      <div className='bg-transparent'>
+        <NavContainer>
           <Link to="/"><h2>Sport</h2></Link>
           <div className={` links ${active ? 'active' : ''}`}>
             <Link to="/">Home</Link>
-            <Link to="/about">Sobre Nosotros</Link>
+            {userSessionData.rol == 'user' && <Link to="/reservar">Reservar</Link>}
             {!authSession ? (<>
-              <Link onClick={() => handleLoginButton()}>Login</Link>
+              <Link onClick={() => handleLoginButton()}>Log In</Link>
               <Link onClick={() => handleSignupButton()}>Sign Up</Link>
             </>) : (<>
               {userSessionData.rol == 'admin' && <Link to="/admin">Admin</Link>}
@@ -86,9 +86,9 @@ const Navbar = () => {
         </NavContainer>
         {isOpen && <ProfileDropdown onClick={singOut} rol={userSessionData.rol} />}
         {sessionOut &&
-          <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-transparent w-[220px] h-[150px] shadow-xl'} >
+          <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-baseBlack w-[220px] h-[150px] shadow-white shadow-sm'} >
             <div className="w-full h-full p-4 flex items-center justify-center">
-              <h1 className='font-semibold text-base text-center'>Has cerrado sesión.</h1>
+              <h1 className='font-semibold text-base text-center text-white'>Has cerrado sesión.</h1>
             </div>
           </ModalContainer >}
       </div>
@@ -107,7 +107,12 @@ const NavContainer = styled.nav`
       font-weight: bold;
     }
   }
-  padding: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  padding: 1rem;
   display: flex;
   align-items: center;
   text-align: center;
@@ -150,7 +155,7 @@ const NavContainer = styled.nav`
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    top: 30%;
+    top: 100%;
     left: 0;
     right: 0;
     text-align: center;
@@ -170,7 +175,7 @@ const NavContainer = styled.nav`
 `
 
 const BgDiv = styled.div`
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: transparent;
   backdrop-filter: blur(10px);
   position: absolute;
   top: -1200px;

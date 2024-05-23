@@ -58,16 +58,16 @@ const SignUpCard = () => {
    return (
       <div className='w-full h-full m-auto mt-2 rounded-lg mb-2'>
          <form className='p-5 rounded-lg overflow-y-auto' onSubmit={handleSubmit}>
-            <p className='font-medium text-bg-baseBlack mb-1'>Te pediremos algunos datos, esto no tardara mucho! 👋🏻</p>
+            <p className='font-medium text-white mb-4'>Te pediremos algunos datos, esto no tardara mucho! 👋🏻</p>
             <InputWithLabel onChange={handleChange} value={userForm.nombre} type='text' name='nombre' label="Nombre" className='mb-3' />
             <InputWithLabel onChange={handleChange} value={userForm.apellido} type='text' name='apellido' label="Apellido" className='mb-3' />
             <InputWithLabel onChange={handleChange} value={userForm.email} type='mail' name='email' label="Email" className='mb-3' />
             <InputWithLabel onChange={handleChange} value={userForm.password} type='password' name='password' label="Password" className='mb-3' />
             {error?.message && <p className=" m-1 mx-1 text-red-500 text-sm">🚨 {error.message}</p>}
-            <p className='text-baseGray text-sm mt-5'>
+            <p className='text-white text-sm mt-5'>
                Al continuar, acepto los <strong>Términos de servicio,   </strong> También reconozco la Política de privacidad.
             </p>
-            <Button className='bg-blue-500 text-white w-full mt-5'>
+            <Button className='bg-transparent border border-white text-white w-full mt-2 hover:border-green-500 hover:scale-105 transition-all duration-300'>
                Sign Up
             </Button>
          </form>

@@ -22,7 +22,7 @@ const Prueba = () => {
 
     return (
         <div>
-            <button className="btn bg-gray-400 p-2 border rounded-lg text-white hover:bg-white hover:border-black hover:text-black" onClick={handleTest}>Prueba</button>
+            <button className="btn bg-gray-400 p-2 border rounded-lg text-white hover:bg-baseBlack hover:border-black hover:text-black" onClick={handleTest}>Prueba</button>
         </div>
     )
 }

@@ -15,13 +15,39 @@
 }
 
 
+.home {
+  @apply bg-[url('gifs/fondo.gif')] bg-no-repeat bg-cover bg-center min-h-screen;
+}
+
+
+@media screen and (max-width: 640px) {
+  .home {
+    @apply bg-[url('images/fondo.png')] bg-no-repeat bg-cover bg-center min-h-screen;
+  }
+}
+
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Quitar controles en Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
+/* Elimina todos los colores de autocompletar en Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  color: white !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: white !important;
+  /* Cambia el color del texto aquí */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Elimina todos los colores de autocompletar en Firefox */
+input:-moz-autofill {
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -moz-text-fill-color: white inherit !important;
 }

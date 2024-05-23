@@ -8,10 +8,10 @@ export default function AuthModalIndex({ }) {
     const { setModalData, modalData, setAuth, auth } = useCtx()
 
     return <ModalContainer className={`h-[85vh]`} onClose={() => setModalData({ open: false, modalId: "" })}>
-        <div className='w-full max-h-full  transition-all'>
+        <div className='w-full max-h-full  transition-all bg-base'>
             <div className='flex font-medium border-b pb-5'>
-                <button className='mr-5 focus:text-blue-500' onClick={() => setModalData({ open: true, modalId: "LOGIN" })}>Login</button>
-                <button className='focus:text-blue-500' onClick={() => setModalData({ open: true, modalId: "SIGNUP" })}>Sign Up</button>
+                <button className='mr-5 text-white focus:text-green-500' onClick={() => setModalData({ open: true, modalId: "LOGIN" })}>Login</button>
+                <button className='text-white focus:text-green-500' onClick={() => setModalData({ open: true, modalId: "SIGNUP" })}>Sign Up</button>
             </div>
             {
                 modalData?.modalId === "LOGIN" && <LoginCard />

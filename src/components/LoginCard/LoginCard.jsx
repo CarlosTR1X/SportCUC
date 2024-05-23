@@ -24,22 +24,22 @@ const LoginCard = () => {
             if (verify) setFormData({ email: '', password: '' }); setModalData({ open: false, modalId: "" });
 
         } catch (e) {
-            console.log(e.message)
             setError(validateErrorFirebase(e))
+            throw e;
         }
     }
 
     return (
-        <div className='w-[90%] m-auto py-14'>
+        <div className='w-[90%] m-auto py-14 bg-transparent'>
             <form className='p-5  rounded-lg' onSubmit={onSubmit}>
-                <p className='font-medium text-bg-baseBlack mb-6'>Bienvenido de nuevo! 👋🏻</p>
+                <p className='font-medium text-white mb-6'>Bienvenido de nuevo! 👋🏻</p>
                 {error && <p className="m-1 mx-1 text-red-500 text-sm">🚨 {error}</p>}
 
                 <InputWithLabel onChange={handleChange} value={formData.email} type='text' name='email' label="Email" className='mb-3' />
                 <InputWithLabel onChange={handleChange} value={formData.password} type='password' name='password' label="Password" className='mb-3' />
-                <Button className='bg-green-500 text-white w-full mt-2'>Login</Button>
-                <p className='text-gray-600 mt-6 text-sm font-small'>
-                    Si no cuentas con un numero telefónico, <span className='text-gray-600 font-semibold'>Ve otras opciones de ingreso abajo</span>
+                <Button className='bg-transparent border border-white text-white w-full mt-2 hover:border-green-500 hover:scale-105 transition-all duration-300'>Login</Button>
+                <p className='text-white mt-6 text-sm font-small'>
+                    Si no tienes cuenta te invitamos a crear una para mejor experiencia <span className='text-white font-semibold cursor-pointer hover:scale-110 hover:text-green-500 transition-all duration-300'>Registrate</span>
                 </p>
 
             </form>

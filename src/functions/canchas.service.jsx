@@ -1,4 +1,13 @@
-import { addDoc, collection } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    query,
+    updateDoc,
+    where
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 export class Canchas {
@@ -21,19 +30,40 @@ export class Canchas {
             console.error("Error ", error.message);
             throw new Error(error.message);
         }
-
-
     }
 
-    async getCourt(email) {
+    async getCourts() {
         try {
-
-
+            const courtRef = collection(db, "canchas");
+            const querySnapshot = await getDocs(courtRef);
+            const courtDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            return courtDocs;
         } catch (error) {
-            console.error("Error al obtener el usuario:", error);
+            console.error("Error al obtener las canchas:", error);
         }
     }
 
+    async updateCourt(id, newData) {
+        try {
+            const courtRef = doc(db, "canchas", id);
+            await updateDoc(courtRef, newData);
+            return { success: true, message: "Documento actualizado correctamente" };
+        } catch (error) {
+            console.error("Error al actualizar el documento:", error.message);
+            return { success: false, message: "Error al actualizar el documento: " + error.message };
+        }
+    }
+
+    async deleteCourt(id) {
+        try {
+            const courtRef = doc(db, "canchas", id);
+            await deleteDoc(courtRef);
+            return { success: true, message: "Documento eliminado correctamente" };
+        } catch (error) {
+            console.error("Error al eliminar el documento:", error.message);
+            return { success: false, message: "Error al eliminar el documento: " + error.message };
+        }
+    }
 
     isAuthenticated() {
         return this.isAuthenticated;
