@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import BurguerButton from './burguerButton/BurguerButton.component'
 import Button from '../../components/Buttons/Button'
@@ -9,10 +9,34 @@ import ProfileDropdown from '../../components/Buttons/DropdownProfile'
 import ModalContainer from '../../components/Modals/ModalContainer'
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [active, setActive] = useState(false)
   const { authSession, setModalData, modalData, cerrarSesion, userSessionData } = useCtx()
   const [isOpen, setIsOpen] = useState(false);
   const [sessionOut, setSessionOut] = useState(false);
+
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  let navbarClasses = ['navbar'];
+  if (scrolled) {
+    navbarClasses.push('scrolled');
+  }
 
   const handleClick = () => {
     setActive(!active)
@@ -45,6 +69,7 @@ const Navbar = () => {
       setActive(false);
       setIsOpen(false);
       setSessionOut(!sessionOut);
+      navigate('/')
       setTimeout(() => {
         setSessionOut(false);
       }, 4000);
@@ -58,8 +83,8 @@ const Navbar = () => {
       { /*** LOGIN AND SIGNUP POPUP */
         !authSession && modalData.open && (modalData.modalId === "LOGIN" || modalData.modalId === "SIGNUP") && <AuthModalIndex />
       }
-      <div className='bg-transparent'>
-        <NavContainer>
+      <div >
+        <NavContainer className={`${navbarClasses.join(' ')} `}>
           <Link to="/"><h2>Sport</h2></Link>
           <div className={` links ${active ? 'active' : ''}`}>
             <Link to="/">Home</Link>
@@ -70,8 +95,8 @@ const Navbar = () => {
             </>) : (<>
               {userSessionData.rol == 'admin' && <Link to="/admin">Admin</Link>}
               <Link onClick={toggleDropdown}>
-                <div className="mt-2 inline-flex w-8 h-8 relative justify-center border-4 border-white rounded-full overflow-hidden">
-                  <img className="object-fill object-center" src='images/user_default.jpg' alt='Woman looking front' />
+                <div className="mt-2 inline-flex w-8 h-8 relative justify-center rounded-full overflow-hidden">
+                  <img className="object-fill object-center scale-110" src='images/user_default.jpg' alt='Woman looking front' />
                 </div>
               </Link>
 
@@ -86,7 +111,7 @@ const Navbar = () => {
         </NavContainer>
         {isOpen && <ProfileDropdown onClick={singOut} rol={userSessionData.rol} />}
         {sessionOut &&
-          <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-baseBlack w-[220px] h-[150px] shadow-white shadow-sm'} >
+          <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-baseBlack w-[220px] h-[150px] shadow-gray-600 shadow-sm'} >
             <div className="w-full h-full p-4 flex items-center justify-center">
               <h1 className='font-semibold text-base text-center text-white'>Has cerrado sesión.</h1>
             </div>
@@ -117,6 +142,7 @@ const NavContainer = styled.nav`
   align-items: center;
   text-align: center;
   justify-content: space-between;
+  transition: background-color 0.3s;
   a{
     color: white;
     text-decoration: none;

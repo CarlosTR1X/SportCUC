@@ -65,6 +65,18 @@ export class Canchas {
         }
     }
 
+    async getCourtByStatus() {
+        try {
+            const courtRef = doc(db, "canchas", id);
+            const querySnapshot = await getDocs(query(courtRef, where('email', '==', email)));
+            const courtDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            return courtDocs;
+
+        } catch (error) {
+            console.error("Error al obtener el usuario:", error);
+        }
+    }
+
     isAuthenticated() {
         return this.isAuthenticated;
     }

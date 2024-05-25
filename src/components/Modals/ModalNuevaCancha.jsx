@@ -67,7 +67,7 @@ const ModalNuevaCancha = ({ onClose }) => {
             <ModalContainer className={`w-[420px]`} onClose={onClose}>
                 <div className='w-full h-full m-auto mt-2 rounded-lg mb-2'>
                     <form className='p-5 rounded-lg overflow-y-auto' onSubmit={handleSubmit}>
-                        <p className='font-medium text-baseBlack m-2'>Nueva cancha</p>
+                        <p className='font-medium text-white m-2'>Nueva cancha</p>
                         {error?.message &&
                             <p className=" m-1 mx-1 text-red-500 text-xs">
                                 🚨 {error.message}

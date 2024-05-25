@@ -4,11 +4,11 @@ import { convertTimestamp } from '../../utils/dateUtils';
 const ItemsCard = ({ item, onEdit, onDelete, onShow }) => {
     const date = convertTimestamp(item.createdAt);
     return (
-        <div className='px-2'>
-            <div className="max-w-sm p-2 rounded-lg overflow-hidden shadow-white  bg-baseBlack">
+        <div className='p-2'>
+            <div className="max-w-sm p-2 rounded-lg overflow-hidden shadow-white w-full h-full bg-baseBlack">
                 <img className="w-full h-28 object-cover" src={item.imagen_URL} alt={item.nombre} />
-                <div className="px-5 pb-4">
-                    <div className="font-bold text-base text-center text-white my-1">{item.nombre}</div>
+                <div className="px-5 pb-4 h-28">
+                    <div className="font-bold text-lg text-center text-white m-4">{item.nombre}</div>
                     <p className="text-baseGray text-sm">{item.descripcion}</p>
                 </div>
                 <div className="px-5 pt-2 pb-2">

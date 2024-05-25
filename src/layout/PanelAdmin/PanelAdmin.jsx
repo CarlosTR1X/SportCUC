@@ -77,7 +77,7 @@ const PanelAdmin = () => {
 
     return (
         <>
-            <div className="bg-[url('/images/fondo.png')] bg-no-repeat bg-cover bg-center min-h-screen">
+            <div className="bg-[url('/images/fondo.png')] bg-no-repeat bg-cover bg-center min-h-screen pt-16">
                 <ButtonAgregar text={`Agregar Cancha`} onClick={handleNuevaCancha} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {courts.map((cancha, index) => (

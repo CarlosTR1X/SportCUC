@@ -51,3 +51,10 @@ input:-moz-autofill {
   box-shadow: 0 0 0px 1000px white inset !important;
   -moz-text-fill-color: white inherit !important;
 }
+
+.navbar.scrolled {
+  transition: background-color 0.3s, backdrop-filter 0.3s;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); 
+}
