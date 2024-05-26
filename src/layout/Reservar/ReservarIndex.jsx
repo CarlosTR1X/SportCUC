@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import ItemsCard from '../../components/Cards/ItemsCard';
 import { Canchas } from '../../functions/canchas.service';
+import { Reservas } from '../../functions/Reservar.service';
 import CardHorizontalForPlace from '../../components/Cards/CardHorizontalForPlace';
 
 const ReservarIndex = () => {
     const canchaServices = new Canchas();
+    const bookingInstance = new Reservas();
     const [courts, setCourts] = useState([]);
 
     const fetchCourts = async () => {
         try {
-            const courtData = await canchaServices.getCourts();
+            const courtData = await canchaServices.getCourtByStatus();
             setCourts(courtData);
         } catch (error) {
             console.error("Error al obtener las canchas:", error);
         }
     };
 
+
     useEffect(() => {
         fetchCourts();
     }, []);
+
+    const handleSaveBooking = async (item) => {
+        const userData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null;
+        const bookingSaveData = {
+            nombre: item.nombre,
+            customerId: userData.id,
+            canchaId: item.id
+        }
+        const booking = await bookingInstance.saveBooking(bookingSaveData)
+        if (booking) {
+            fetchCourts();
+            console.log("Reserva guardada correctamente");
+        }
+    }
 
     return (
         <>
@@ -29,6 +45,7 @@ const ReservarIndex = () => {
                         <CardHorizontalForPlace
                             key={index}
                             item={cancha}
+                            onClick={() => handleSaveBooking(cancha)}
                         />
                     ))}
                 </div>

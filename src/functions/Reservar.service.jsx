@@ -9,30 +9,46 @@ import {
     where
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { Canchas } from "./canchas.service";
 
-export class Canchas {
-    constructor() { }
+const canchaServices = new Canchas();
 
-    async saveCourt(cancha) {
+export class Reservas {
+
+    constructor() {
+
+    }
+
+    async saveBooking(booking) {
         try {
-            const docRef = await addDoc(collection(db, "canchas"), {
-                "nombre": cancha.nombre,
-                "tipo": cancha.tipo,
-                "descripcion": cancha.descripcion,
-                "disponibilidad": cancha.disponibilidad,
-                "capacidad": cancha.capacidad,
-                "direccion": cancha.direccion,
-                "imagen_URL": cancha.imagen_URL,
+            const reservasRef = collection(db, "reservas");
+
+            // Realizamos una consulta para verificar si ya existe una reserva con el mismo canchaId
+            const querySnapshot = await getDocs(query(reservasRef, where('canchaId', '==', booking.canchaId)));
+
+            if (!querySnapshot.empty) {
+                throw new Error("Ya existe una reserva para esta cancha.");
+            }
+
+            const docRef = await addDoc(reservasRef, {
+                "nombre": booking.nombre,
+                "customerId": booking.customerId,
+                "canchaId": booking.canchaId,
                 "createdAt": new Date()
             });
-            return docRef.id;
+            if (docRef) {
+                const cancha = await canchaServices.updateCourtAvailability(booking.canchaId, false);
+                if (cancha.success) {
+                    return docRef.id;
+                }
+            }
         } catch (error) {
             console.error("Error ", error.message);
             throw new Error(error.message);
         }
     }
 
-    async getCourts() {
+    async getBookings() {
         try {
             const courtRef = collection(db, "canchas");
             const querySnapshot = await getDocs(courtRef);
@@ -43,7 +59,7 @@ export class Canchas {
         }
     }
 
-    async updateCourt(id, newData) {
+    async updateBooking(id, newData) {
         try {
             const courtRef = doc(db, "canchas", id);
             await updateDoc(courtRef, newData);
@@ -76,15 +92,4 @@ export class Canchas {
             console.error("Error al obtener el usuario:", error);
         }
     }
-
-    async updateCourtAvailability(id, disponibilidad) {
-        try {
-            const courtRef = doc(db, "canchas", id);
-            await updateDoc(courtRef, { disponibilidad: disponibilidad });
-            return { success: true, message: "Disponibilidad de la cancha actualizada correctamente" };
-        } catch (error) {
-            return { success: false, message: "Error al actualizar la disponibilidad de la cancha: " + error.message };
-        }
-    }
-
 }

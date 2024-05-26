@@ -30,7 +30,10 @@ export class User {
             const querySnapshot = await getDocs(query(usuariosRef, where('email', '==', email)));
             if (!querySnapshot.empty) {
                 const userDoc = querySnapshot.docs[0];
-                return userDoc.data()
+                return {
+                    id: userDoc.id,
+                    ...userDoc.data()
+                };
             }
         } catch (error) {
             console.error("Error al obtener el usuario:", error);
