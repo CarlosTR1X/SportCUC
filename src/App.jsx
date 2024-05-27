@@ -37,7 +37,7 @@ function App() {
             <Routes>
               <Route path="*" element={<Error />} />
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<AuthIndex />} />
+              <Route path="/login" element={<> <Home /> <AuthIndex /> </>} />
               <Route path="/admin" element={<AdminRoute element={<PanelAdmin />} />} />
               <Route path="/reservar" element={<UserRoute element={<ReservarIndex />} />} />
             </Routes>

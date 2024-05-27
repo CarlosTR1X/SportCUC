@@ -75,7 +75,6 @@ export function CtxProvider({ children }) {
             setAuthSession(null);
             localStorage.removeItem('userData');
             setUserSessionData(null);
-            /*    setModalData({ open: false, modalId: "" }) */
         } catch (e) {
             throw e;
         }
