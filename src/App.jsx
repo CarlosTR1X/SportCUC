@@ -8,6 +8,7 @@ import AuthIndex from './layout/AuthIndex/AuthIndex'
 import ReservarIndex from './layout/Reservar/ReservarIndex'
 import Home from './layout/home/Home'
 import Footer from './layout/Footer/Footer.component'
+import Error from './layout/error/Error.component'
 
 
 
@@ -35,6 +36,7 @@ function App() {
           <Router>
             <Navbar />
             <Routes>
+              <Route path="*" element={<Error />} />
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<> <Home /> <AuthIndex /> </>} />
               <Route path="/admin" element={<AdminRoute element={<PanelAdmin />} />} />

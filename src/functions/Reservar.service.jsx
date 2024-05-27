@@ -23,12 +23,12 @@ export class Reservas {
         try {
             const reservasRef = collection(db, "reservas");
 
-          /*   // Realizamos una consulta para verificar si ya existe una reserva con el mismo canchaId
-            const querySnapshot = await getDocs(query(reservasRef, where('canchaId', '==', booking.canchaId)));
+            // Realizamos una consulta para verificar si ya existe una reserva con el mismo canchaId
+            const querySnapshot = await getDocs(query(reservasRef, where('canchaId', '==', booking.canchaId), where('status', '==', true)));
 
             if (!querySnapshot.empty) {
                 throw new Error("Ya existe una reserva para esta cancha.");
-            } */
+            }
 
             const docRef = await addDoc(reservasRef, {
                 "nombre": booking.nombre,
