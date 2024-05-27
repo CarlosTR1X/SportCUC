@@ -11,7 +11,6 @@ import Footer from './layout/Footer/Footer.component'
 import Error from './layout/error/Error.component'
 
 
-
 function App() {
   const { authSession } = useCtx()
 
