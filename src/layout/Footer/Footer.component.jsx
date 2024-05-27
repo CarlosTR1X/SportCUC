@@ -14,6 +14,10 @@ const Footer = () => {
         setFormData({ ...formData, [name]: value })
     }
 
+    const handleReservar = () => {
+        console.log('Reservar')
+    }
+
     return (
         <footer className="bg-black text-white py-8">
             <div className="container mx-auto px-4">
@@ -41,8 +45,7 @@ const Footer = () => {
                     <div>
                         <h2 className="text-lg font-bold mb-4">Enlaces Rápidos</h2>
                         <ul className="space-y-2">
-                            <li><a href="/reservar" className="hover:text-gray-400">Reservar</a></li>
-
+                            <li onClick={(handleReservar)}><a className="hover:text-gray-400">Reservar</a></li>
                         </ul>
                     </div>
                     {/* Newsletter Subscription */}
@@ -60,7 +63,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="text-center mt-8">
-                    <p>&copy; 2024 Sport, Inc. Todos los derechos reservados.</p>
+                    <p className='text-xs'>&copy; 2024 Sport, Inc. Todos los derechos reservados.</p>
                 </div>
             </div>
         </footer>

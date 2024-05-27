@@ -39,7 +39,6 @@ const Navbar = () => {
 
   const handleClick = () => {
     setActive(!active)
-    setIsOpen(false);
   }
 
   const handleLoginButton = () => {
@@ -82,7 +81,7 @@ const Navbar = () => {
           <Link to="/"><h2>Sport</h2></Link>
           <div className={` links ${active ? 'active' : ''}`}>
             <Link to="/">Home</Link>
-            {userSessionData.rol == 'user' && <>
+            {userSessionData && userSessionData.rol == 'user' && <>
               <Link to="/reservar">Reservar</Link>
             </>
             }

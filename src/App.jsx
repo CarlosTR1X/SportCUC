@@ -8,7 +8,7 @@ import AuthIndex from './layout/AuthIndex/AuthIndex'
 import ReservarIndex from './layout/Reservar/ReservarIndex'
 import Home from './layout/home/Home'
 import Footer from './layout/Footer/Footer.component'
-import { ChakraProvider } from '@chakra-ui/react'
+
 
 
 
@@ -37,7 +37,7 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<AuthIndex />} />
+              <Route path="/login" element={<> <Home /> <AuthIndex /> </>} />
               <Route path="/admin" element={<AdminRoute element={<PanelAdmin />} />} />
               <Route path="/reservar" element={<UserRoute element={<ReservarIndex />} />} />
             </Routes>
