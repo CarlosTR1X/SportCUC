@@ -14,6 +14,7 @@ const ReservarIndex = () => {
     const [activeTab, setActiveTab] = useState(1);
     const [myBookings, setMyBookings] = useState([]);
     const [finishBooking, setFinishBooking] = useState();
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [modalStatus, setModalStatus] = useState({
         finalise: false
     });
@@ -61,15 +62,22 @@ const ReservarIndex = () => {
     }, []);
 
     const handleSaveBooking = async (item) => {
-        const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : null;
-        const bookingSaveData = {
-            nombre: item.nombre,
-            customerId: userData.id,
-            canchaId: item.id,
-        };
-        const booking = await bookingInstance.saveBooking(bookingSaveData);
-        if (booking) {
-            fetchCourts();
+        setIsButtonDisabled(true); // Deshabilitar el botón
+        try {
+            const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : null;
+            const bookingSaveData = {
+                nombre: item.nombre,
+                customerId: userData.id,
+                canchaId: item.id,
+            };
+            const booking = await bookingInstance.saveBooking(bookingSaveData);
+            if (booking) {
+                fetchCourts();
+            }
+        } catch (error) {
+            console.error("Error al guardar la reserva: ", error);
+        } finally {
+            setIsButtonDisabled(false); // Rehabilitar el botón al finalizar
         }
     };
 
@@ -142,6 +150,7 @@ const ReservarIndex = () => {
                                         key={index}
                                         item={cancha}
                                         onClick={() => handleSaveBooking(cancha)}
+                                        disabled={isButtonDisabled}
                                     />
                                 ))}
                             </div>

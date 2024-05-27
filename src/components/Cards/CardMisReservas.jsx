@@ -2,7 +2,7 @@ import Button from "../Buttons/Button"
 import Imagen from "../Image/Image"
 
 
-const CardMisReservas = ({ item, onClick }) => {
+const CardMisReservas = ({ item, onClick, disabled }) => {
     return <div className='flex-row bg-baseBlack text-baseBlack justify-end mx-auto max-w-[320px] backdrop-blur-sm rounded-lg my-2'>
         {/**plave image */}
         <div className='flex w-full h-[200px]'>

@@ -2,7 +2,7 @@ import Button from "../Buttons/Button"
 import Imagen from "../Image/Image"
 
 
-const CardHorizontalForPlace = ({ item, onClick }) => {
+const CardHorizontalForPlace = ({ item, onClick, disabled }) => {
   return <div className='flex-row bg-baseBlack text-baseBlack justify-end mx-auto max-w-[320px] backdrop-blur-sm rounded-lg my-2'>
     {/**plave image */}
     <div className='flex w-full h-[200px]'>
@@ -23,7 +23,7 @@ const CardHorizontalForPlace = ({ item, onClick }) => {
         &nbsp;{item.direccion}</p>
       {/** caracteristicas y precio */}
       <div className="flex justify-center items-center border-t-2 border-gray-200">
-        <Button onClick={onClick} className="bg-transparent border border-white text-white text-sm  mt-2 hover:bg-baseBlack hover:text-green-500 hover:border-green-500 hover:scale-105 transition-all duration-300"> Reservar </Button>
+        <Button disabled={disabled} onClick={onClick}  className="bg-transparent border border-white text-white text-sm  mt-2 hover:bg-baseBlack hover:text-green-500 hover:border-green-500 hover:scale-105 transition-all duration-300"> Reservar </Button>
       </div>
     </div>
   </div>
