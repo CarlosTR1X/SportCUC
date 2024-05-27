@@ -8,6 +8,7 @@ import AuthIndex from './layout/AuthIndex/AuthIndex'
 import ReservarIndex from './layout/Reservar/ReservarIndex'
 import Home from './layout/home/Home'
 import Footer from './layout/Footer/Footer.component'
+import { ChakraProvider } from '@chakra-ui/react'
 
 
 

@@ -12,7 +12,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState(false)
   const { authSession, setModalData, modalData, cerrarSesion, userSessionData } = useCtx()
-  const [isOpen, setIsOpen] = useState(false);
   const [sessionOut, setSessionOut] = useState(false);
 
   const [scrolled, setScrolled] = useState(false);
@@ -52,10 +51,6 @@ const Navbar = () => {
     setActive(false)
   }
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
   const onCloseSessionOutModal = () => {
     setSessionOut(!sessionOut);
   }
@@ -67,8 +62,7 @@ const Navbar = () => {
       const close = await cerrarSesion();
       if (close != null) throw new Error('Algo ha salido mal.')
       setActive(false);
-      setIsOpen(false);
-      setSessionOut(!sessionOut);
+      setSessionOut(true);
       navigate('/')
       setTimeout(() => {
         setSessionOut(false);
@@ -83,7 +77,7 @@ const Navbar = () => {
       { /*** LOGIN AND SIGNUP POPUP */
         !authSession && modalData.open && (modalData.modalId === "LOGIN" || modalData.modalId === "SIGNUP") && <AuthModalIndex />
       }
-      <div >
+      <div>
         <NavContainer className={`${navbarClasses.join(' ')} `}>
           <Link to="/"><h2>Sport</h2></Link>
           <div className={` links ${active ? 'active' : ''}`}>
@@ -97,10 +91,8 @@ const Navbar = () => {
               <Link onClick={() => handleSignupButton()}>Sign Up</Link>
             </>) : (<>
               {userSessionData.rol == 'admin' && <Link to="/admin">Admin</Link>}
-              <Link onClick={toggleDropdown}>
-                <div className="mt-2 inline-flex w-8 h-8 relative justify-center rounded-full overflow-hidden">
-                  <img className="object-fill object-center scale-110" src='images/user_default.jpg' alt='Woman looking front' />
-                </div>
+              <Link onClick={() => { singOut() }} className='mx-auto hover:text-red-200'>
+                <i className="relative fas fa-sign-out-alt my-auto "></i> Cerrar sesión
               </Link>
 
             </>
@@ -112,7 +104,6 @@ const Navbar = () => {
           </div>
           <BgDiv className={`initial ${active ? ' active' : ''}`}></BgDiv>
         </NavContainer>
-        {isOpen && <ProfileDropdown onClick={singOut} rol={userSessionData.rol} />}
         {sessionOut &&
           <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-baseBlack w-[220px] h-[150px] shadow-gray-600 shadow-sm'} >
             <div className="w-full h-full p-4 flex items-center justify-center">
@@ -204,8 +195,6 @@ const NavContainer = styled.nav`
 `
 
 const BgDiv = styled.div`
-  background-color: transparent;
-  backdrop-filter: blur(10px);
   position: absolute;
   top: -1200px;
   left: 0;
@@ -215,10 +204,17 @@ const BgDiv = styled.div`
   transition: all .6s ease-in-out;
   
   &.active{
+    overflow: hidden;
+    backdrop-filter: blur(10px) !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
     border-radius: 0 0 10px 10px;
-    top: 75px;
+    top: 70px;
     left: 0;
     width: 100%;
     height: 500px;
+
+    body{
+      overflow: hidden;
+    }
   }
 `
