@@ -3,7 +3,7 @@ import Imagen from "../Image/Image"
 
 
 const CardHorizontalForPlace = ({ item, onClick }) => {
-  return <div className='flex-row bg-baseBlack text-baseBlack justify-end mx-auto max-w-[320px] backdrop-blur-sm rounded-lg'>
+  return <div className='flex-row bg-baseBlack text-baseBlack justify-end mx-auto max-w-[320px] backdrop-blur-sm rounded-lg my-2'>
     {/**plave image */}
     <div className='flex w-full h-[200px]'>
       <Imagen path={`${item.imagen_URL}`} alt="place image" className="mx-auto rounded-lg object-cover w-full h-full " />

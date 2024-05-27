@@ -7,6 +7,7 @@ import PanelAdmin from './layout/PanelAdmin/PanelAdmin'
 import AuthIndex from './layout/AuthIndex/AuthIndex'
 import ReservarIndex from './layout/Reservar/ReservarIndex'
 import Home from './layout/home/Home'
+import Footer from './layout/Footer/Footer.component'
 
 
 
@@ -39,6 +40,7 @@ function App() {
               <Route path="/admin" element={<AdminRoute element={<PanelAdmin />} />} />
               <Route path="/reservar" element={<UserRoute element={<ReservarIndex />} />} />
             </Routes>
+            <Footer />
           </Router>
         </CtxProvider>
       </div>

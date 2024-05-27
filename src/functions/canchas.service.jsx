@@ -3,6 +3,7 @@ import {
     collection,
     deleteDoc,
     doc,
+    getDoc,
     getDocs,
     query,
     updateDoc,
@@ -43,6 +44,21 @@ export class Canchas {
         }
     }
 
+    async getCourtById(id) {
+        try {
+            const courtRef = doc(db, "canchas", id);
+            const docSnap = await getDoc(courtRef);
+            if (docSnap.empty) {
+                throw new Error("No se encontró ningún documento con ese ID.");
+            }
+            return docSnap.data();
+        } catch (error) {
+            console.error("Error obteniendo el documento:", error.message);
+            throw error;
+        }
+    }
+    
+
     async updateCourt(id, newData) {
         try {
             const courtRef = doc(db, "canchas", id);
@@ -71,9 +87,8 @@ export class Canchas {
             const querySnapshot = await getDocs(query(courtRef, where('disponibilidad', '==', true)));
             const courtDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             return courtDocs;
-
         } catch (error) {
-            console.error("Error al obtener el usuario:", error);
+            console.error("Error al obtener el usuario:", error.message);
         }
     }
 

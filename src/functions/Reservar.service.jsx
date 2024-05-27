@@ -34,6 +34,7 @@ export class Reservas {
                 "nombre": booking.nombre,
                 "customerId": booking.customerId,
                 "canchaId": booking.canchaId,
+                "status": true,
                 "createdAt": new Date()
             });
             if (docRef) {
@@ -51,7 +52,7 @@ export class Reservas {
     async getBookings() {
         try {
             const courtRef = collection(db, "canchas");
-            const querySnapshot = await getDocs(courtRef);
+            const querySnapshot = await getDocs(query(courtRef, where('status', '==', true)));
             const courtDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             return courtDocs;
         } catch (error) {
@@ -59,6 +60,17 @@ export class Reservas {
         }
     }
 
+    async getMyBookings(userId) {
+        try {
+            const bookingsRef = collection(db, "reservas");
+            const querySnapshot = await getDocs(query(bookingsRef, where('customerId', '==', userId)));
+            const bookingDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+           return bookingDocs;
+        } catch (error) {
+            console.error("Error al obtener las canchas:", error.message);
+        }
+    }
+    
     async updateBooking(id, newData) {
         try {
             const courtRef = doc(db, "canchas", id);
@@ -70,26 +82,4 @@ export class Reservas {
         }
     }
 
-    async deleteCourt(id) {
-        try {
-            const courtRef = doc(db, "canchas", id);
-            await deleteDoc(courtRef);
-            return { success: true, message: "Documento eliminado correctamente" };
-        } catch (error) {
-            console.error("Error al eliminar el documento:", error.message);
-            return { success: false, message: "Error al eliminar el documento: " + error.message };
-        }
-    }
-
-    async getCourtByStatus() {
-        try {
-            const courtRef = collection(db, "canchas");
-            const querySnapshot = await getDocs(query(courtRef, where('disponibilidad', '==', true)));
-            const courtDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            return courtDocs;
-
-        } catch (error) {
-            console.error("Error al obtener el usuario:", error);
-        }
-    }
 }

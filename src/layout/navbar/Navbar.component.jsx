@@ -88,7 +88,10 @@ const Navbar = () => {
           <Link to="/"><h2>Sport</h2></Link>
           <div className={` links ${active ? 'active' : ''}`}>
             <Link to="/">Home</Link>
-            {userSessionData.rol == 'user' && <Link to="/reservar">Reservar</Link>}
+            {userSessionData.rol == 'user' && <>
+              <Link to="/reservar">Reservar</Link>
+            </>
+            }
             {!authSession ? (<>
               <Link onClick={() => handleLoginButton()}>Log In</Link>
               <Link onClick={() => handleSignupButton()}>Sign Up</Link>
