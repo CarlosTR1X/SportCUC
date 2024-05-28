@@ -30,9 +30,9 @@ function App() {
   };
   return (
     <>
-      <div className="bg-[url('/images/fondo.png')] md:bg-[url('/gifs/fondo.gif')] bg-no-repeat bg-cover bg-center min-h-screen">
-        <CtxProvider>
-          <Router>
+      <CtxProvider>
+        <Router>
+          <div className="bg-[url('/images/fondo.png')] md:bg-[url('/gifs/fondo.gif')] bg-no-repeat object-fill bg-cover bg-center min-h-screen w-full">
             <Navbar />
             <Routes>
               <Route path="*" element={<Error />} />
@@ -41,10 +41,11 @@ function App() {
               <Route path="/admin" element={<AdminRoute element={<PanelAdmin />} />} />
               <Route path="/reservar" element={<UserRoute element={<ReservarIndex />} />} />
             </Routes>
-            <Footer />
-          </Router>
-        </CtxProvider>
-      </div>
+          </div>
+          <Footer />
+        </Router>
+      </CtxProvider>
+
     </>
   )
 }

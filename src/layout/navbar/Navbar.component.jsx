@@ -89,7 +89,7 @@ const Navbar = () => {
               <Link onClick={() => handleLoginButton()}>Log In</Link>
               <Link onClick={() => handleSignupButton()}>Sign Up</Link>
             </>) : (<>
-              {userSessionData.rol == 'admin' && <Link to="/admin">Admin</Link>}
+              {userSessionData && userSessionData.rol == 'admin' && <Link to="/admin">Admin</Link>}
               <Link onClick={() => { singOut() }} className='mx-auto hover:text-red-200'>
                 <i className="relative fas fa-sign-out-alt my-auto "></i> Cerrar sesión
               </Link>
@@ -104,7 +104,7 @@ const Navbar = () => {
           <BgDiv className={`initial ${active ? ' active' : ''}`}></BgDiv>
         </NavContainer>
         {sessionOut &&
-          <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-baseBlack w-[220px] h-[150px] shadow-gray-600 shadow-sm'} >
+          <ModalContainer onClose={() => { onCloseSessionOutModal() }} className={'bg-baseBlack w-[250px] h-[150px] shadow-gray-600 shadow-sm'} >
             <div className="w-full h-full p-4 flex items-center justify-center">
               <h1 className='font-semibold text-base text-center text-white'>Has cerrado sesión.</h1>
             </div>
@@ -174,7 +174,7 @@ const NavContainer = styled.nav`
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    top: 100%;
+    top: 150px;
     left: 0;
     right: 0;
     text-align: center;
