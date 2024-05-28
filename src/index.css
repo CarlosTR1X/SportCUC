@@ -13,19 +13,6 @@
   font-style: normal;
 }
 
-
-.home {
-  @apply bg-[url('gifs/fondo.gif')] bg-no-repeat bg-cover bg-center min-h-screen;
-}
-
-
-@media screen and (max-width: 640px) {
-  .home {
-    @apply bg-[url('images/fondo.png')] bg-no-repeat bg-cover bg-center min-h-screen;
-  }
-}
-
-
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
