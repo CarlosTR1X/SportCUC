@@ -37,6 +37,11 @@ const ModalEditCancha = ({ onClose, data }) => {
                 imagen_URL: canchaForm.imagen_URL,
                 disponibilidad: canchaForm.disponibilidad,
             }
+
+            if (canchaForm.nombre === "" || canchaForm.descripcion === "" || canchaForm.tipo === "" || canchaForm.capacidad === "" || canchaForm.direccion === "" || canchaForm.imagen_URL === "") {
+                setError({ message: 'Todos los campos son obligatorios' })
+                return;
+            }
             const canchaActualizada = await canchaServices.updateCourt(data.id, canchaData);
             if (canchaActualizada) {
                 setPopUpStatus(true);
@@ -67,6 +72,7 @@ const ModalEditCancha = ({ onClose, data }) => {
                 <div className='w-full h-full m-auto mt-2 rounded-lg mb-2'>
                     <form className='p-5 rounded-lg overflow-y-auto' onSubmit={handleSubmit}>
                         <p className='font-medium text-white m-2'>Editar cancha</p>
+                        {error?.message && <p className=" m-1 mx-1 text-red-500 text-xs md:text-sm whitespace-nowrap">🚨{error.message}</p>}
                         <InputWithLabel onChange={handleChange} value={canchaForm.nombre} type='text' name='nombre' label="Nombre" className='mb-3 ' />
                         <InputWithLabel onChange={handleChange} value={canchaForm.descripcion} type='text' name='descripcion' label="Descripcion" className='mb-3' />
                         <InputWithLabel onChange={handleChange} value={canchaForm.capacidad} type='number' name='capacidad' label="Capacidad Max." className='mb-3' />
@@ -75,7 +81,7 @@ const ModalEditCancha = ({ onClose, data }) => {
                         <div>
                             <InputWhithToggleSwitch value={canchaForm.disponibilidad} className='w-full' label='Disponibilidad' name={'disponibilidad'} onChange={handleChange} />
                         </div>
-                        {error?.message && <p className=" m-1 mx-1 text-red-500 text-sm">🚨 {error.message}</p>}
+                     
 
                         <Button className='bg-green-500 border border-white text-white w-full mt-2 hover:border-green-500 hover:scale-105 transition-all duration-300'>
                             Save

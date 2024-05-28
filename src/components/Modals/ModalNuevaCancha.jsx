@@ -37,7 +37,10 @@ const ModalNuevaCancha = ({ onClose }) => {
                 imagen_URL: canchaForm.imagen_URL,
                 disponibilidad: canchaForm.disponibilidad,
             }
-            if (canchaData.nombre === '') { return setError({ message: 'El nombre de la cancha es requerido' }) }
+            if (canchaForm.nombre === "" || canchaForm.descripcion === "" || canchaForm.tipo === "" || canchaForm.capacidad === "" || canchaForm.direccion === "" || canchaForm.imagen_URL === "") {
+                setError({ message: 'Todos los campos son obligatorios' })
+                return;
+            }
             const nuevaCancha = await canchaServices.saveCourt(canchaData);
             if (nuevaCancha) {
                 setCanchaForm({ nombre: '', descripcion: '', tipo: '', capacidad: '', direccion: '', imagen_URL: '', disponibilidad: '' })
@@ -69,7 +72,7 @@ const ModalNuevaCancha = ({ onClose }) => {
                     <form className='p-5 rounded-lg overflow-y-auto' onSubmit={handleSubmit}>
                         <p className='font-medium text-white m-2'>Nueva cancha</p>
                         {error?.message &&
-                            <p className=" m-1 mx-1 text-red-500 text-xs">
+                            <p className=" m-1 mx-1 text-red-500 text-xs md:text-sm whitespace-nowrap">
                                 🚨 {error.message}
                             </p>}
                         <InputWithLabel onChange={handleChange} value={canchaForm.nombre} type='text' name='nombre' label="Nombre" className='mb-3 ' />
