@@ -23,21 +23,21 @@ const Footer = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Logo and Social Media */}
-                    <div>
+                    <div className="flex flex-col items-center">
                         <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+                            src="/svg/nike.svg"
                             alt="Nike Logo"
-                            className="w-24 mb-4"
+                            className="w-32 mb-4 lg:blur-3xl hover:blur-0 transition-all duration-500 ease-in-out hover:scale-105 cursor-pointer"
                         />
                         <div className="flex space-x-4">
-                            <a href="https://www.facebook.com/nike" target="_blank" rel="noopener noreferrer">
-                                <i className="fab fa-facebook fa-2x hover:text-blue-500 hover:scale-105 transitio duration-300"></i>
+                            <a target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-facebook fa-2x hover:text-blue-500 hover:scale-105 transition duration-300"></i>
                             </a>
-                            <a href="https://www.twitter.com/nike" target="_blank" rel="noopener noreferrer">
-                                <i className="fab fa-twitter fa-2x hover:text-blue-200 hover:scale-105 transitio duration-300"></i>
+                            <a target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-twitter fa-2x hover:text-blue-200 hover:scale-105 transition duration-300"></i>
                             </a>
-                            <a href="https://www.instagram.com/nike" target="_blank" rel="noopener noreferrer">
-                                <i className="fab fa-instagram fa-2x  rounded-xl hover:bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-50 hover:scale-105 transitio duration-100"></i>
+                            <a target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-instagram fa-2x rounded-full hover:bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-50 hover:scale-105 transition duration-100"></i>
                             </a>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ const Footer = () => {
                     <div>
                         <h2 className="text-lg font-bold mb-4">Enlaces Rápidos</h2>
                         <ul className="space-y-2">
-                            <li onClick={(handleReservar)}><a className="hover:text-gray-400">Reservar</a></li>
+                            <li onClick={handleReservar}><a className="hover:text-gray-400">Reservar</a></li>
                         </ul>
                     </div>
                     {/* Newsletter Subscription */}
@@ -67,6 +67,7 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
+
     );
 };
 

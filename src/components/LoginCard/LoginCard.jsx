@@ -38,7 +38,6 @@ const LoginCard = () => {
             <form className='p-2 md:p-5 rounded-lg' onSubmit={onSubmit}>
                 <p className='font-medium text-white mb-6'>Bienvenido de nuevo! 👋🏻</p>
                 {error && <p className="m-1 mx-1 text-red-500 text-xs md:text-sm whitespace-nowrap">🚨 {error}</p>}
-
                 <InputWithLabel onChange={handleChange} value={formData.email} type='text' name='email' label="Email" className='mb-3' />
                 <InputWithLabel onChange={handleChange} value={formData.password} type='password' name='password' label="Password" className='mb-3' />
                 <Button className='bg-transparent border border-white text-white w-full mt-2 hover:border-green-500 hover:scale-105 transition-all duration-300'>Login</Button>

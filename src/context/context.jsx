@@ -62,6 +62,9 @@ export function CtxProvider({ children }) {
     const signUp = async (email, password) => {
         try {
             const user = await createUserWithEmailAndPassword(auth, email, password);
+            const userData = await userInstance.getUser(email);
+            setUserSessionData(userData)
+            localStorage.setItem('userData', JSON.stringify(userData));
             return user
         } catch (e) {
             throw e;
