@@ -30,7 +30,7 @@ function App() {
   };
   return (
     <>
-      <div className="bg-[url('/gifs/fondo.gif')] bg-no-repeat bg-cover bg-center min-h-screen">
+      <div className="bg-[url('/images/fondo.png')] md:bg-[url('/gifs/fondo.gif')] bg-no-repeat bg-cover bg-center min-h-screen">
         <CtxProvider>
           <Router>
             <Navbar />
