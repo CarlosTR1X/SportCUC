@@ -11,7 +11,7 @@ module.exports = {
         "baseGray": "#d1d5db",
         "darkerGray": "#344054",
         "baseGreen": "#32D583",
-        'baseBlack': 'rgba(0, 0, 0, 0.6)',
+        'baseBlack': 'rgba(0, 0, 0, 0.9)',
       },
       screens: {
         'mdsm': '768px', //  breakpoint personalizado

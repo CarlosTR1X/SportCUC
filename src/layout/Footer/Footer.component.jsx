@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import InputWithLabel from '../../components/Inputs/InputWithLabel';
+import { useCtx } from '../../context/context';
+import { Link } from 'react-router-dom';
 
 
 
 const Footer = () => {
-
+    const { authSession, setModalData, modalData, cerrarSesion, userSessionData } = useCtx()
     const [formData, setFormData] = useState({
         email: ''
     });
@@ -14,8 +16,13 @@ const Footer = () => {
         setFormData({ ...formData, [name]: value })
     }
 
-    const handleReservar = () => {
-        console.log('Reservar')
+    const handleLoginButton = () => {
+        setModalData({ open: true, modalId: "LOGIN" })
+        setActive(false)
+    }
+    const handleSignupButton = () => {
+        setModalData({ open: true, modalId: "SIGNUP" })
+        setActive(false)
     }
 
     return (
@@ -23,7 +30,7 @@ const Footer = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Logo and Social Media */}
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col md:flex-col md:items-start items-center">
                         <img
                             src="/svg/nike.svg"
                             alt="Nike Logo"
@@ -45,7 +52,17 @@ const Footer = () => {
                     <div>
                         <h2 className="text-lg font-bold mb-4">Enlaces Rápidos</h2>
                         <ul className="space-y-2">
-                            <li onClick={handleReservar}><a className="hover:text-gray-400">Reservar</a></li>
+                            <li><Link to="/">Home</Link></li>
+                            {!authSession && (<>
+                                <li><Link onClick={() => handleLoginButton()}>Log In</Link></li>
+                                <li><Link onClick={() => handleSignupButton()}>Sign Up</Link></li>
+                            </>)}
+                            {userSessionData && userSessionData.rol == 'user' && <>
+                                <li> <Link to="/reservar">Reservar</Link></li>
+                            </>
+                            }
+                            {userSessionData && userSessionData.rol == 'admin' && <><li><Link to="/admin">Admin</Link></li></>}
+
                         </ul>
                     </div>
                     {/* Newsletter Subscription */}

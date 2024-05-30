@@ -38,11 +38,15 @@ input:-moz-autofill {
   -moz-text-fill-color: white inherit !important;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .navbar.scrolled {
   transition: background-color 0.3s, backdrop-filter 0.3s;
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px) !important;
 }
 
 /* Estilos para la barra de desplazamiento */
@@ -55,6 +59,7 @@ input:-moz-autofill {
   background: #bbbbbb;
 
 }
+
 
 ::-webkit-scrollbar-thumb {
   background: #999999;

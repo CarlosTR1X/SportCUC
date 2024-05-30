@@ -145,14 +145,22 @@ const ReservarIndex = () => {
                             <h1 className="text-lg md:text-3xl font-bold text-center text-white m-5">Reserva tu cancha favorita</h1>
                             <SearchBar onSearch={setSearchTerm} />
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                {filteredCourts.map((cancha, index) => (
-                                    <CardHorizontalForPlace
-                                        key={index}
-                                        item={cancha}
-                                        onClick={() => handleSaveBooking(cancha)}
-                                        disabled={isButtonDisabled}
-                                    />
-                                ))}
+                                {filteredCourts.length > 0 ? (<>
+                                    {filteredCourts.map((cancha, index) => (
+                                        <CardHorizontalForPlace
+                                            key={index}
+                                            item={cancha}
+                                            onClick={() => handleSaveBooking(cancha)}
+                                            disabled={isButtonDisabled}
+                                        />
+                                    ))}
+                                </>
+
+                                ) : (
+                                    <div className="col-span-1 sm:col-span-2 md:col-span-3 flex justify-center items-center">
+                                        <h2 className="w-full text-white text-center mx-auto">No se encuentran canchas activas 🧐</h2>
+                                    </div>
+                                )}
                             </div>
                         </div>}
                     {activeTab === 2 &&
