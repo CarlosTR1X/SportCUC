@@ -52,10 +52,10 @@ const Footer = () => {
                     <div>
                         <h2 className="text-lg font-bold mb-4">Enlaces Rápidos</h2>
                         <ul className="space-y-2">
-                            <li><Link to="/">Home</Link></li>
+                            <li><Link className='hover:text-green-500' to="/">Home</Link></li>
                             {!authSession && (<>
-                                <li><Link onClick={() => handleLoginButton()}>Log In</Link></li>
-                                <li><Link onClick={() => handleSignupButton()}>Sign Up</Link></li>
+                                <li><span className="cursor-pointer hover:text-green-500" onClick={() => handleLoginButton()}>Log In</span></li>
+                                <li><span className="cursor-pointer hover:text-green-500" onClick={() => handleSignupButton()}>Sign Up</span></li>
                             </>)}
                             {userSessionData && userSessionData.rol == 'user' && <>
                                 <li> <Link to="/reservar">Reservar</Link></li>
